@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/svg+xml" href="/public/logo.svg" />
+
+    <!-- IMPORTS CSS -->
+    <link rel="stylesheet" href="./style.css" />
+
+    <!-- IMPORTS JS -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+
+    <!-- MATERIAL ICONS -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+
+    <title>Datavox</title>
+  </head>
+  <body>
+    <div class="floatingButtons">
+      <button id="openForm">
+        <i class="material-icons">edit</i>
+      </button>
+
+      <button id="removePage">
+        <i class="material-icons">delete</i>
+      </button>
+
+      <input class="hidden" type="file" id="fileInput" accept=".xlsx" />
+      <button id="addPage">
+        <i class="material-icons">add</i>
+      </button>
+    </div>
+
+    <section>
+      <div class="home">
+        <h1 class="homeTitle">
+          <span id="titleValue">Título</span>
+        </h1>
+        <div class="backgroundHome">
+          <img src="/public/logo.svg" alt="Logo" class="logo" />
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="a4">
+        <h1 class="title">ESPECIFICAÇÕES TÉCNICAS DA PESQUISA</h1>
+
+        <p>
+          OBJETIVO - Levantar junto a população da área em estudo opiniões
+          relacionadas a assuntos políticos/administrativos.
+        </p>
+
+        <p>LOCAL - <span id="cityValue">cidade</span>.</p>
+
+        <p>PERÍODO DE CAMPO - Dia <span id="dateValue">data</span>.</p>
+
+        <p>
+          UNIVERSO - A pesquisa foi realizada com pessoas de 16 anos ou mais da
+          área em estudo.
+        </p>
+
+        <p>
+          AMOSTRA - Foram realizadas amostras representativas da população em
+          estudo, estratificada com alocação proporcional à população de cada
+          estrato. Os estratos considerados foram os setores censitários. Dentro
+          de cada estrato foram selecionadas amostras probabilísticas de
+          conglomerado em 2 estágios. No primeiro estágio são selecionados os
+          conglomerados: setores censitários, com PPT (Probabilidade
+          Proporcional ao Tamanho) sistemático. A medida de tamanho é a
+          população de 16 anos ou mais residente nos setores. Finalmente, no
+          segundo estágio, através do método sistemático, é selecionado em cada
+          conglomerado um número fixo de eleitores segundo cotas de variáveis
+          descritas abaixo:
+        </p>
+
+        <p>
+          SEXO - Masculino e Feminino – Dados do Censo Demográfico do IBGE/2000.
+        </p>
+
+        <p>
+          GRUPO DE IDADE - 16-24, 25-34, 35-44, 45-59, 60 anos e mais – Dados de
+          Censo Demográfico do IBGE/2000.
+        </p>
+
+        <p>LOCALIZAÇÃO GEOGRÁFICA - Município de Cabaceiras – Dados do IBGE.</p>
+
+        <p>
+          NÚMERO DE ENTREVISTAS - Foram realizadas
+          <span id="numberInterviewsValue">0</span> entrevistas.
+        </p>
+
+        <div class="infoBottom">
+          <p>
+            CNPJ Nº 10956929/0001-42 | Avenida Manoel Tavares, 700 – Sala 103 –
+            Empresarial Vila Bianco | Jardim Tavares – Campina Grande. PB – CEP
+            58402-068 <br />
+            (83) 9979.0891 - 99308.5727
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="a4">
+        <p>
+          INTERVALO DE CONFIANÇA/ MARGEM DE ERRO - O intervalo de confiança
+          estimado é de 95,0% e a margem de erro máxima estimada é de 3,0%
+          pontos percentuais para mais ou para menos sobre os resultados
+          encontrados no total da amostra e uma estimativa de proporcionalidade
+          (p e 1-p) estimada em 6,5%.
+        </p>
+
+        <p>
+          COLETA DE DADOS - Entrevistas pessoais com utilização de questionário
+          elaborado de acordo com os objetivos da pesquisa. - As entrevistas
+          foram realizadas por uma equipe de entrevistadores do DATAVOX -
+          Pesquisas de Opinião Pública e Estatísticas Ltda., devidamente
+          treinada para abordagem deste tipo de público.
+        </p>
+
+        <p>
+          CONTROLE DE QUALIDADE - Houve filtragem em todos os questionários após
+          a realização das entrevistas. - Fiscalização em aproximadamente 20%
+          dos questionários.
+        </p>
+
+        <div class="infoBottom">
+          <p>
+            CNPJ Nº 10956929/0001-42 | Avenida Manoel Tavares, 700 – Sala 103 –
+            Empresarial Vila Bianco | Jardim Tavares – Campina Grande. PB – CEP
+            58402-068 <br />
+            (83) 9979.0891 - 99308.5727
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="a4">
+        <h1 class="title">APRESENTAÇÃO DOS RESULTADOS</h1>
+
+        <p>
+          PARA EFEITO DE TABULAÇÃO FORAM CONSIDERADAS AS SEGUINTES VARIÁVEIS:
+        </p>
+
+        <ul>
+          <li>TOTAL</li>
+          <li>SEXO - Masculino e Feminino.</li>
+          <li>
+            GRUPO DE IDADE - 16 a 24 anos, 25 a 34 anos, 35 a 44 anos, 45 a 59
+            anos e 60 anos e mais.
+          </li>
+          <li>
+            ESCOLARIDADE - Até 5º Ano, Do 6º ao 9º Ano, Ensino Médio e Superior.
+          </li>
+          <li>RENDA FAMILIAR - Até 1 SM, De 1 a 3 SM e mais de 3 SM.</li>
+          <li>ZONA - Urbana e Rural.</li>
+          <li>
+            LOCALIDADES RURAIS - Ribeira, Curral de Baixo, Alto da Boa Vista,
+            Santa Cruz, Poço Comprido, Pata, Tapera, Assentamento Serra do
+            Monte, Comunidade São Francisco e Facão.
+          </li>
+          <li>
+            BAIRROS - Nova Cabaceiras, Félix Araújo, Cruzeiro da Pedra, Centro
+            Histórico e Centro de Cabaceiras
+          </li>
+        </ul>
+
+        <div class="infoBottom">
+          <p>
+            CNPJ Nº 10956929/0001-42 | Avenida Manoel Tavares, 700 – Sala 103 –
+            Empresarial Vila Bianco | Jardim Tavares – Campina Grande. PB – CEP
+            58402-068 <br />
+            (83) 9979.0891 - 99308.5727
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="a4">
+        <h1 class="title">PERFIL DA AMOSTRA</h1>
+        
+        <div class="infoBottom">
+          <p>
+            CNPJ Nº 10956929/0001-42 | Avenida Manoel Tavares, 700 – Sala 103 –
+            Empresarial Vila Bianco | Jardim Tavares – Campina Grande. PB – CEP
+            58402-068 <br />
+            (83) 9979.0891 - 99308.5727
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="tableSection"></section>
+
+    <section class="container">
+      <div class="a4 lastPage">
+        <div class="lastPageInfo">
+          <h1>DATAVOX – Pesquisas de Opinião Pública e Estatísticas Ltda</h1>
+          <p>CNPJ Nº 10956929/0001-42</p>
+          <p>
+            Avenida Manoel Tavares, 700 – Sala 103 – Empresarial Vila Bianco
+          </p>
+          <p>Jardim Tavares – Campina Grande - PB – CEP 58402-068</p>
+          <p>(83) 3055.0868 – 9979.0891 – 99308.5727</p>
+          <p>E-mail: instituto.datavox@gmail.com</p>
+        </div>
+
+        <div class="infoBottom">
+          <p>
+            CNPJ Nº 10956929/0001-42 | Avenida Manoel Tavares, 700 – Sala 103 –
+            Empresarial Vila Bianco | Jardim Tavares – Campina Grande. PB – CEP
+            58402-068 <br />
+            (83) 9979.0891 - 99308.5727
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div id="floatingForm" class="hidden">
+      <form id="editForm">
+        <label for="title">Título:</label>
+        <input
+          type="text"
+          id="title"
+          placeholder="Ex: Pesquisa de satisfação"
+        />
+
+        <label for="city">Cidade:</label>
+        <input type="text" id="city" placeholder="Ex: Cabaceiras - PB" />
+
+        <label for="date">Data:</label>
+        <input type="text" id="date" placeholder="Ex: 23 de dezembro de 2023" />
+
+        <label for="numberInterviews">Número de entrevistas:</label>
+        <input type="text" id="numberInterviews" placeholder="Ex: 300" />
+
+        <button type="button" id="saveChanges">Salvar</button>
+        <button type="button" id="closeForm">Fechar</button>
+      </form>
+    </div>
+  </body>
+  <script type="module" src="/main.js"></script>
+</html>
