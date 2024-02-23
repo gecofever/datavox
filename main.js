@@ -1,6 +1,6 @@
-import { addNewPage } from './addNewPage.js'
-import { removePage } from './removePage.js'
-import { saveChanges } from './saveChanges.js'
+import { addNewPage } from './server/addNewPage.js'
+import { removePage } from './server/removePage.js'
+import { saveChanges } from './server/saveChanges.js'
 
 const openFormButton = document.getElementById('openForm')
 
@@ -67,13 +67,7 @@ fileInput.addEventListener('change', function (event) {
       a4.appendChild(inputTitle)
       a4.appendChild(inputSubtitle)
 
-      addTable(
-        a4,
-        filteredData,
-        options,
-        subheader,
-        tableTitle,
-      )
+      addTable(a4, filteredData, options, subheader, tableTitle)
     }
 
     reader.readAsArrayBuffer(file)
@@ -85,13 +79,7 @@ addPageButton.addEventListener('click', () => {
   fileInput.click()
 })
 
-function addTable(
-  container,
-  data,
-  options,
-  subheader,
-  tableTitle,
-) {
+function addTable(container, data, options, subheader, tableTitle) {
   const table = document.createElement('table')
   table.classList.add('table')
 
@@ -167,21 +155,39 @@ function addTable(
     const tr = document.createElement('tr')
 
     const td = document.createElement('td')
-    td.textContent = options[i]
+
+    const optionText =
+      options[i].toLowerCase() === 'soma' ? 'Total' : options[i]
+
+    td.textContent = optionText
     tr.appendChild(td)
 
     for (let j = 1; j <= 15; j++) {
       const td = document.createElement('td')
-      const value = row[j] !== null ? row[j] : 'N/A'
+      const value = row[j] !== null ? (row[j] === 0 ? '0.0' : row[j]) : 'N/A'
       td.textContent = value
+
       tr.appendChild(td)
     }
 
     tbody.appendChild(tr)
   }
 
+  const lastRow = tbody.lastElementChild
+  const firstCellText = lastRow.firstElementChild.textContent
+    .trim()
+    .toLocaleLowerCase()
+
+  if (firstCellText === 'total') {
+    lastRow.classList.add('totalRow')
+  }
+
   table.appendChild(tbody)
   container.appendChild(table)
+
+  if (options.length > 20) {
+    table.classList.add('noPadding')
+  }
 
   const a4 = addNewPage()
 
@@ -198,10 +204,10 @@ function addTable(
   a4.appendChild(inputTitle)
   a4.appendChild(inputSubtitle)
 
-  addSecondTable(a4, data, subheader)
+  addSecondTable(a4, data, options, subheader)
 }
 
-function addSecondTable(container, data, subheader) {
+function addSecondTable(container, data, options, subheader) {
   const table = document.createElement('table')
   table.classList.add('table')
 
@@ -210,7 +216,10 @@ function addSecondTable(container, data, subheader) {
 
   const firstRow = document.createElement('tr')
 
-  const zoneColspan = subheader.includes('Urbana') ? 2 : 1
+  const hasUrbana = subheader.includes('Urbana')
+  const hasRural = subheader.includes('Rural')
+
+  const zoneColspan = (hasUrbana ? 1 : 0) + (hasRural ? 1 : 0)
 
   const headers = [
     { text: 'Discriminação', rowspan: 2 },
@@ -220,7 +229,6 @@ function addSecondTable(container, data, subheader) {
 
   headers.forEach((headerData) => {
     const th = document.createElement('th')
-    th.textContent = headerData.text
 
     if (headerData.rowspan) {
       th.setAttribute('rowspan', headerData.rowspan)
@@ -230,6 +238,12 @@ function addSecondTable(container, data, subheader) {
       th.setAttribute('colspan', headerData.colspan)
     }
 
+    const editableInput = document.createElement('input')
+    editableInput.setAttribute('type', 'text')
+    editableInput.value = headerData.text
+    editableInput.classList.add('editableHeader')
+
+    th.appendChild(editableInput)
     firstRow.appendChild(th)
   })
 
@@ -256,20 +270,40 @@ function addSecondTable(container, data, subheader) {
 
     // Adiciona as opções na primeira coluna
     const td = document.createElement('td')
-    const options = row[0] !== null ? row[0] : 'N/A'
+    const options =
+      row[0] !== null
+        ? row[0].trim().toLowerCase() === 'soma'
+          ? 'Total'
+          : row[0]
+        : 'N/A'
+
     td.textContent = options
     tr.appendChild(td)
 
     // Adiciona os valores a partir da coluna 17
     row.slice(16).forEach((value) => {
       const td = document.createElement('td')
-      td.textContent = value !== null ? value : 'N/A'
+      td.textContent = value !== null ? (value === 0 ? '0.0' : value) : 'N/A'
+
       tr.appendChild(td)
     })
 
     tbody.appendChild(tr)
   }
 
+  const lastRow = tbody.lastElementChild
+  const firstCellText = lastRow.firstElementChild.textContent
+    .trim()
+    .toLocaleLowerCase()
+
+  if (firstCellText === 'total') {
+    lastRow.classList.add('totalRow')
+  }
+
   table.appendChild(tbody)
   container.appendChild(table)
+
+  if (options.length > 20) {
+    table.classList.add('noPadding')
+  }
 }

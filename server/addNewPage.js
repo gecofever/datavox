@@ -12,7 +12,7 @@ export function addNewPage() {
   
     const textInfo = document.createElement("p");
     textInfo.innerHTML =
-      "CNPJ Nº 10956929/0001-42 | Avenida Manoel Tavares, 700 – Sala 103 –  Empresarial Vila Bianco | Jardim Tavares – Campina Grande. PB – CEP 58402-068 <br/> (83) 9979.0891 - 99308.5727";
+      "CNPJ Nº 10956929/0001-42 | Avenida Manoel Tavares, 700 – Sala 103 –  Empresarial Vila Bianco | Jardim Tavares – Campina Grande. PB – CEP 58402-068 <br/> (83) 9 9979.0891 - 9 9308.5727";
   
     info.appendChild(textInfo);
   
