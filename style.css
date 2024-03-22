@@ -22,7 +22,7 @@
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .container {
@@ -94,6 +94,138 @@ ul li {
   z-index: 10;
 }
 
+#table-options {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+#select-table {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  position: relative;
+}
+
+#select-table #model1,
+#select-table #model2 {
+  width: 400px;
+  height: 30px;
+  background-color: #e01e36;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+#select-table #model1:hover,
+#select-table #model2:hover {
+  background-color: #b8122b;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.table-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.chart-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+#chart-options {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+#select-chart {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  position: relative;
+}
+
+#select-chart #bar-chart,
+#select-chart #pie-chart {
+  width: 400px;
+  height: 30px;
+  background-color: #e01e36;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+#select-chart #bar-chart:hover,
+#select-chart #pie-chart:hover {
+  background-color: #b8122b;
+}
+
+#table2 {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#table2 h1 {
+  font-size: 24px;
+  margin-top: 16px;
+}
+
+#table2-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+#table2-form input {
+  height: 30px;
+  padding: 8px;
+  text-align: center;
+}
+
+#add-second-table {
+  height: 30px;
+  background-color: #e01e36;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+#add-second-table:hover {
+  background-color: #b8122b;
+}
+
+#close-table-options {
+  position: fixed;
+  width: 30px;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
 .home {
   display: flex;
   justify-content: center;
@@ -158,6 +290,14 @@ ul li {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.a4Chart {  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 32px;
 }
 
 .a4 {

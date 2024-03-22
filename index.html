@@ -33,7 +33,13 @@
         <i class="material-icons">delete</i>
       </button>
 
-      <input class="hidden" type="file" id="fileInput" accept=".xlsx" />
+      <input
+        class="hidden"
+        type="file"
+        id="fileInput"
+        accept=".xlsx"
+        multiple
+      />
       <button id="addPage">
         <i class="material-icons">add</i>
       </button>
@@ -59,7 +65,7 @@
           relacionadas a assuntos políticos/administrativos.
         </p>
 
-        <p>LOCAL - <span id="cityValue">cidade</span>.</p>
+        <p>LOCAL - <span class="cityValue">cidade</span>.</p>
 
         <p>PERÍODO DE CAMPO - Dia <span id="dateValue">data</span>.</p>
 
@@ -91,7 +97,10 @@
           Censo Demográfico do IBGE/2000.
         </p>
 
-        <p>LOCALIZAÇÃO GEOGRÁFICA - Município de Cabaceiras – Dados do IBGE.</p>
+        <p>
+          LOCALIZAÇÃO GEOGRÁFICA - Município de
+          <span class="cityValue">cidade</span> – Dados do IBGE.
+        </p>
 
         <p>
           NÚMERO DE ENTREVISTAS - Foram realizadas
@@ -163,16 +172,12 @@
             ESCOLARIDADE - Até 5º Ano, Do 6º ao 9º Ano, Ensino Médio e Superior.
           </li>
           <li>RENDA FAMILIAR - Até 1 SM, De 1 a 3 SM e mais de 3 SM.</li>
-          <li>ZONA - Urbana e Rural.</li>
+          <li>ZONA - <span id="zoneValue">Urbana e Rural</span>.</li>
           <li>
-            LOCALIDADES RURAIS - Ribeira, Curral de Baixo, Alto da Boa Vista,
-            Santa Cruz, Poço Comprido, Pata, Tapera, Assentamento Serra do
-            Monte, Comunidade São Francisco e Facão.
+            LOCALIDADES RURAIS -
+            <span id="ruralLocationsValue">Localidades rurais</span>.
           </li>
-          <li>
-            BAIRROS - Nova Cabaceiras, Félix Araújo, Cruzeiro da Pedra, Centro
-            Histórico e Centro de Cabaceiras
-          </li>
+          <li>BAIRROS - <span id="districtsValue">Bairros</span>.</li>
         </ul>
 
         <div class="infoBottom">
@@ -201,7 +206,45 @@
       </div>
     </section>
 
+    <section class="container">
+      <div class="a4 lastPage">
+        <div class="lastPageInfo">
+          <h1>Apresentação dos resultados</h1>
+          <p>Tabelas</p>
+        </div>
+
+        <div class="infoBottom">
+          <p>
+            CNPJ Nº 10956929/0001-42 | Avenida Manoel Tavares, 700 – Sala 103 –
+            Empresarial Vila Bianco | Jardim Tavares – Campina Grande. PB – CEP
+            58402-068 <br />
+            (83) 9 9979.0891 - 9 9308.5727
+          </p>
+        </div>
+      </div>
+    </section>
+
     <section id="tableSection"></section>
+
+    <section class="container">
+      <div class="a4 lastPage">
+        <div class="lastPageInfo">
+          <h1>Apresentação dos resultados</h1>
+          <p>Gráficos</p>
+        </div>
+
+        <div class="infoBottom">
+          <p>
+            CNPJ Nº 10956929/0001-42 | Avenida Manoel Tavares, 700 – Sala 103 –
+            Empresarial Vila Bianco | Jardim Tavares – Campina Grande. PB – CEP
+            58402-068 <br />
+            (83) 9 9979.0891 - 9 9308.5727
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="chartSection"></section>
 
     <section class="container">
       <div class="a4 lastPage">
@@ -245,9 +288,114 @@
         <label for="numberInterviews">Número de entrevistas:</label>
         <input type="text" id="numberInterviews" placeholder="Ex: 300" />
 
+        <label for="zone">Zona:</label>
+        <input
+          type="text"
+          id="zone"
+          value="Urbana e Rural"
+          placeholder="Ex: Urbana e Rural"
+        />
+
+        <label for="ruralLocations">Localidades rurais:</label>
+        <input
+          type="text"
+          id="ruralLocations"
+          placeholder="Ex: Ribeira, Curral de Baixo"
+        />
+
+        <label for="districts">Bairros:</label>
+        <input
+          type="text"
+          id="districts"
+          placeholder="Ex: Nova Cabaceiras, Félix Araújo"
+        />
+
         <button type="button" id="saveChanges">Salvar</button>
         <button type="button" id="closeForm">Fechar</button>
       </form>
+    </div>
+
+    <div id="table-options" class="hidden">
+      <form action="" id="select-table">
+        <svg
+          id="close-table-options"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="rgba(224,30,54,1)"
+        >
+          <path
+            d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"
+          ></path>
+        </svg>
+
+        <div class="buttons">
+          <div class="table-buttons">
+            <button type="button" id="model1">Modelo 1</button>
+            <button type="button" id="model2">Modelo 2</button>
+          </div>
+          <div class="chart-buttons">
+            <div class="radio-button">
+              <input name="chartType" type="radio" checked="true" value="Bar" />
+              Gráfico de barras
+            </div>
+            <div class="radio-button">
+              <input name="chartType" type="radio" value="Pie" /> Gráfico de
+              pizza
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div id="table2" class="hidden">
+        <h1>Edite a quantidade de colunas de cada tabela</h1>
+
+        <form action="" id="table2-form">
+          <input
+            type="text"
+            id="number-of-columns"
+            value="15"
+            placeholder="Tabela 1"
+          />
+          <input
+            type="text"
+            id="number-of-columns"
+            value="16"
+            placeholder="Tabela 2"
+          />
+          <input
+            type="text"
+            id="number-of-columns"
+            value="18"
+            placeholder="Tabela 3"
+          />
+          <input
+            type="text"
+            id="number-of-columns"
+            value="5"
+            placeholder="Tabela 4"
+          />
+        </form>
+
+        <button id="add-second-table" type="button">Adicionar</button>
+      </div>
+    </div>
+
+    <div id="chart-options" class="hidden">
+      <div action="" id="select-chart">
+        <svg
+          id="close-chart-options"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="rgba(224,30,54,1)"
+        >
+          <path
+            d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"
+          ></path>
+        </svg>
+
+        <button type="button" id="bar-chart">Barra</button>
+        <button type="button" id="pie-chart">Pizza</button>
+      </div>
     </div>
   </body>
   <script type="module" src="/main.js"></script>
