@@ -281,7 +281,7 @@ ul li {
 }
 
 .backgroundHome {
-  background: url(background.svg) no-repeat bottom center;
+  background: url(/background.svg) no-repeat bottom center;
   background-size: 100%;
   width: 29.7cm;
   height: 21cm;
@@ -321,7 +321,7 @@ ul li {
   width: 29.7cm;
   height: 21cm;
   position: relative;
-  background: url(logo2.svg) no-repeat right -80px bottom 60px;
+  background: url(/logo2.svg) no-repeat right -80px bottom 60px;
   background-size: 250px;
   z-index: 0;
   margin-bottom: 2px solid;
