@@ -29,10 +29,6 @@
         <i class="material-icons">edit</i>
       </button>
 
-      <button id="removePage">
-        <i class="material-icons">delete</i>
-      </button>
-
       <input
         class="hidden"
         type="file"
@@ -57,6 +53,11 @@
     </section>
 
     <section class="container">
+      <div class="copyright">
+        <span id="copyrightValue"
+          >Pesquisa interna. Essa pesquisa não pode ser publicada ou divulgada.
+        </span>
+      </div>
       <div class="a4">
         <h1 class="title">ESPECIFICAÇÕES TÉCNICAS DA PESQUISA</h1>
 
@@ -120,13 +121,17 @@
 
     <section class="container">
       <div class="a4">
-        <p>
+        <div
+          style="margin-bottom: 32px"
+          contenteditable="true"
+          class="multiline-input"
+        >
           INTERVALO DE CONFIANÇA/ MARGEM DE ERRO - O intervalo de confiança
           estimado é de 95,0% e a margem de erro máxima estimada é de 3,0%
           pontos percentuais para mais ou para menos sobre os resultados
           encontrados no total da amostra e uma estimativa de proporcionalidade
           (p e 1-p) estimada em 6,5%.
-        </p>
+        </div>
 
         <p>
           COLETA DE DADOS - Entrevistas pessoais com utilização de questionário
@@ -173,11 +178,20 @@
           </li>
           <li>RENDA FAMILIAR - Até 1 SM, De 1 a 3 SM e mais de 3 SM.</li>
           <li>ZONA - <span id="zoneValue">Urbana e Rural</span>.</li>
-          <li>
-            LOCALIDADES RURAIS -
-            <span id="ruralLocationsValue">Localidades rurais</span>.
+          <li
+            style="margin-bottom: 32px"
+            contenteditable="true"
+            class="multiline-input"
+          >
+            LOCALIDADES RURAIS - N/A.
           </li>
-          <li>BAIRROS - <span id="districtsValue">Bairros</span>.</li>
+          <li
+            style="margin-bottom: 32px"
+            contenteditable="true"
+            class="multiline-input"
+          >
+            BAIRROS - N/A.
+          </li>
         </ul>
 
         <div class="infoBottom">
@@ -193,7 +207,12 @@
 
     <section class="container">
       <div class="a4">
-        <h1 class="title">PERFIL DA AMOSTRA</h1>
+        <h1 class="title-sample-profile">PERFIL DA AMOSTRA</h1>
+
+        <div class="sample-profile">
+          <button id="sample-profile" type="button">Adicionar</button>
+        </div>
+        <section id="sampleProfileSection"></section>
 
         <div class="infoBottom">
           <p>
@@ -207,8 +226,8 @@
     </section>
 
     <section class="container">
-      <div class="a4 lastPage">
-        <div class="lastPageInfo">
+      <div class="a4 results-presentation">
+        <div class="results-presentation-title">
           <h1>Apresentação dos resultados</h1>
           <p>Tabelas</p>
         </div>
@@ -227,8 +246,8 @@
     <section id="tableSection"></section>
 
     <section class="container">
-      <div class="a4 lastPage">
-        <div class="lastPageInfo">
+      <div class="a4 results-presentation">
+        <div class="results-presentation-title">
           <h1>Apresentação dos resultados</h1>
           <p>Gráficos</p>
         </div>
@@ -296,18 +315,11 @@
           placeholder="Ex: Urbana e Rural"
         />
 
-        <label for="ruralLocations">Localidades rurais:</label>
+        <label for="districts">Marca d'água:</label>
         <input
           type="text"
-          id="ruralLocations"
-          placeholder="Ex: Ribeira, Curral de Baixo"
-        />
-
-        <label for="districts">Bairros:</label>
-        <input
-          type="text"
-          id="districts"
-          placeholder="Ex: Nova Cabaceiras, Félix Araújo"
+          id="copyright"
+          value="Pesquisa interna. Essa pesquisa não pode ser publicada ou divulgada."
         />
 
         <button type="button" id="saveChanges">Salvar</button>
@@ -374,6 +386,12 @@
             value="5"
             placeholder="Tabela 4"
           />
+          <input type="text" id="number-of-columns" placeholder="Tabela 5" />
+          <input type="text" id="number-of-columns" placeholder="Tabela 6" />
+          <input type="text" id="number-of-columns" placeholder="Tabela 7" />
+          <input type="text" id="number-of-columns" placeholder="Tabela 8" />
+          <input type="text" id="number-of-columns" placeholder="Tabela 9" />
+          <input type="text" id="number-of-columns" placeholder="Tabela 10" />
         </form>
 
         <button id="add-second-table" type="button">Adicionar</button>

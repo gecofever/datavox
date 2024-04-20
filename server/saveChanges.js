@@ -12,16 +12,11 @@ const dateValueSpan = document.getElementById('dateValue')
 const zoneInput = document.getElementById('zone')
 const zoneValueSpan = document.getElementById('zoneValue')
 
-const ruralLocationsInput = document.getElementById('ruralLocations')
-const ruralLocationsValueSpan = document.getElementById('ruralLocationsValue')
-
-const districtsInput = document.getElementById('districts')
-const districtsValueSpan = document.getElementById('districtsValue')
-
 const numberInterviewsInput = document.getElementById('numberInterviews')
-const numberInterviewsValueSpan = document.getElementById(
-  'numberInterviewsValue',
-)
+const numberInterviewsValueSpan = document.getElementById('numberInterviewsValue')
+
+const copyrightInput = document.getElementById('copyright')
+const copyrightValueSpan = document.getElementById('copyrightValue')
 
 export const saveChanges = () => {
   const titleValue = titleInput.value || 'Título'
@@ -29,20 +24,18 @@ export const saveChanges = () => {
   const dateValue = dateInput.value || 'Data'
   const numberInterviewsValue = numberInterviewsInput.value || '0'
   const zoneValue = zoneInput.value || 'Urbana e Rural'
-  const ruralLocationsValue = ruralLocationsInput.value || 'Localidades rurais'
-  const districtsValue = districtsInput.value || 'Bairros'
+  const copyrightValue = copyrightInput.value || ''
 
   titleValueSpan.textContent = titleValue
-  
+
   cityValueSpans.forEach((span) => {
     span.textContent = cityValue
   })
-  
+
   dateValueSpan.textContent = dateValue
   numberInterviewsValueSpan.textContent = numberInterviewsValue
   zoneValueSpan.textContent = zoneValue
-  ruralLocationsValueSpan.textContent = ruralLocationsValue
-  districtsValueSpan.textContent = districtsValue
+  copyrightValueSpan.textContent = copyrightValue
 
   floatingForm.classList.add('hidden')
 }

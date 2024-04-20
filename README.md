@@ -4,9 +4,6 @@ Projeto do conversor para o cliente Datavox
 
 // Para fazer
 
-- Arredondar números com casa decimal
-- Adicionar opção de gráficos
-- Carregar várias tabelas de vez
 - Corrigir logo
 
 // Concluído
@@ -19,3 +16,5 @@ Projeto do conversor para o cliente Datavox
 - Implementar verificação de zona urbana sem zona rural
 - Header "localidades rurais" editável
 - Remover padding se a tabela possuir mais de 19 itens em opções
+- Adicionar opção de gráficos
+- Carregar várias tabelas de vez
