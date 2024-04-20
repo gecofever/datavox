@@ -1,5 +1,4 @@
 :root {
-  font-family: sans-serif, Inter, system-ui, Avenir, Helvetica, Arial;
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
@@ -12,6 +11,7 @@
 }
 
 * {
+  font-family: sans-serif, Inter, system-ui, Avenir, Helvetica, Arial;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -28,7 +28,6 @@
 .container {
   display: flex;
   justify-content: center;
-  /* position: relative; */
 }
 
 ul li {

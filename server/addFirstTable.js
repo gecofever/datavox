@@ -98,16 +98,20 @@ export function addFirstTable(data, options, subheader, tableTitle, valuesArray,
       tr.appendChild(td);
 
       for (let j = 1; j <= 15; j++) {
+        let value = 0;
         const td = document.createElement('td');
         const factor = 10
-        const teste = parseFloat(row[j].toString().replace(',', '.'))
-        // const value = row[j] !== null
-        //   ? (row[j] === 0 ? '0.0' : (Math.round((teste) * factor) / factor).toFixed(1))
-        //   : 'N/A';
-        console.log(row[j])
-        const value = row[j] !== null
-          ? (row[j] === 0 ? '0,0' : row[j].toString().replace('.', ','))
-          : 'N/A';
+
+        if (isSampleProfile) {
+          const _value = row[j] !== null
+            ? (row[j] === 0 ? '0.0' : (Math.round((parseFloat(row[j].toString().replace(',', '.'))) * factor) / factor))
+            : 'N/A';
+          value = _value.toString().replace('.', ',')
+        } else {
+          value = row[j] !== null
+            ? (row[j] === 0 ? '0,0' : row[j].toString().replace('.', ','))
+            : 'N/A';
+        }
 
         td.textContent = value;
         tr.appendChild(td);

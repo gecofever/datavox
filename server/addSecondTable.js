@@ -124,9 +124,18 @@ export function addSecondTable(data, subheader, tableTitle, valuesArray, isSecon
             // td.textContent = subheaderText !== null
             //   ? (subheaderText === 0 ? '0.0' : Math.round(parseFloat(subheaderText.toString().replace(',', '.')) * factor) / factor)
             //   : 'N/A';
-            td.textContent = subheaderText !== null
-              ? (subheaderText === 0 ? '0,0' : subheaderText.toString().replace('.', ','))
-              : 'N/A';
+            if (isSampleProfile) {
+              const _value = subheaderText !== null
+                ? (subheaderText === 0 ? '0.0' : Math.round(parseFloat(subheaderText.toString().replace(',', '.')) * factor) / factor)
+                : 'N/A';
+
+              td.textContent = _value.toString().replace('.', ',')
+            } else {
+              td.textContent = subheaderText !== null
+                ? (subheaderText === 0 ? '0,0' : subheaderText.toString().replace('.', ','))
+                : 'N/A';
+            }
+
             tr.appendChild(td);
           }
         });
@@ -137,9 +146,18 @@ export function addSecondTable(data, subheader, tableTitle, valuesArray, isSecon
           // td.textContent = value !== null
           //   ? (value === 0 ? '0.0' : Math.round(parseFloat(value.toString().replace(',', '.')) * factor) / factor)
           //   : 'N/A';
-          td.textContent = value !== null
-            ? (value === 0 ? '0,0' : value.toString().replace('.', ','))
-            : 'N/A';
+          if (isSampleProfile) {
+            const _value = value !== null
+              ? (value === 0 ? '0.0' : Math.round(parseFloat(value.toString().replace(',', '.')) * factor) / factor)
+              : 'N/A';
+
+            td.textContent = _value.toString().replace('.', ',')
+          } else {
+            td.textContent = value !== null
+              ? (value === 0 ? '0,0' : value.toString().replace('.', ','))
+              : 'N/A';
+          }
+
 
           tr.appendChild(td);
         });

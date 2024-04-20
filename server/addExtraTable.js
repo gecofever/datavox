@@ -83,9 +83,18 @@ export function addExtraTable(data, subheader, tableTitle, valuesArray, isSample
           // td.textContent = subheaderText !== null
           //   ? (subheaderText === 0 ? '0.0' : Math.round(parseFloat(subheaderText.toString().replace(',', '.')) * factor) / factor)
           //   : 'N/A';
-          td.textContent = subheaderText !== null
-            ? (subheaderText === 0 ? '0,0' : subheaderText.toString().replace('.', ','))
-            : 'N/A';
+          if (isSampleProfile) {
+            const _value = subheaderText !== null
+              ? (subheaderText === 0 ? '0.0' : Math.round(parseFloat(subheaderText.toString().replace(',', '.')) * factor) / factor)
+              : 'N/A';
+
+            td.textContent = _value.toString().replace('.', ',')
+          } else {
+            td.textContent = subheaderText !== null
+              ? (subheaderText === 0 ? '0,0' : subheaderText.toString().replace('.', ','))
+              : 'N/A';
+          }
+
           tr.appendChild(td);
         }
       });
