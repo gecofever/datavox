@@ -58,8 +58,8 @@ export function addFirstTable(data, options, subheader, tableTitle, valuesArray,
       '35 a 44 anos': '35 a 44',
       '45 a 59 anos': '45 a 59',
       '60 anos ou mais': '60 e mais',
-      'Até 5º Ano do ensino fundamental': 'Até 5º Ano',
-      'Do 6º ao 9º Ano do ensino fundamental': 'Do 6º a 9º Ano',
+      'Até 5º Ano do ensino fundamental': 'Analfabeto/Lê e Escreve',
+      'Do 6º ao 9º Ano do ensino fundamental': 'Ensino Fundamental',
       'Ensino médio completo ou incompleto': 'Ensino Médio',
       'Superior completo ou incompleto': 'Ensino Superior',
       'Até R$ 1.320,00 (1 S.M)': 'Até 1 S.M.',
@@ -104,13 +104,21 @@ export function addFirstTable(data, options, subheader, tableTitle, valuesArray,
 
         if (isSampleProfile) {
           const _value = row[j] !== null
-            ? (row[j] === 0 ? '0.0' : (Math.round((parseFloat(row[j].toString().replace(',', '.'))) * factor) / factor))
+            ? (row[j] === 0 ? '0,0' : (Math.round((parseFloat(row[j].toString().replace(',', '.'))) * factor) / factor))
             : 'N/A';
+
           value = _value.toString().replace('.', ',')
         } else {
-          value = row[j] !== null
+          const _value = row[j] !== null
             ? (row[j] === 0 ? '0,0' : row[j].toString().replace('.', ','))
             : 'N/A';
+
+          if (!isNaN(parseFloat(_value))) {
+            const val = parseFloat(_value.replace(',', '.')).toFixed(1)
+            value = val.toString().replace('.', ',')
+          } else {
+            value = _value
+          }
         }
 
         td.textContent = value;

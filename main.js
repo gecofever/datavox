@@ -105,7 +105,9 @@ async function addTableAndChart(buffer) {
     });
 
     await addTableFromWorkbook(buffer, isSecondTable, isSampleProfile);
-    addChart(buffer, isBar, isPie);
+    if (!isSampleProfile) {
+      addChart(buffer, isBar, isPie);
+    }
   });
 }
 

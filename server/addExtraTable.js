@@ -80,19 +80,23 @@ export function addExtraTable(data, subheader, tableTitle, valuesArray, isSample
         if (index > colunasAnteriores && index <= (colunasAnteriores + valuesArray[position])) {
           const td = document.createElement('td');
           const factor = 10
-          // td.textContent = subheaderText !== null
-          //   ? (subheaderText === 0 ? '0.0' : Math.round(parseFloat(subheaderText.toString().replace(',', '.')) * factor) / factor)
-          //   : 'N/A';
           if (isSampleProfile) {
             const _value = subheaderText !== null
-              ? (subheaderText === 0 ? '0.0' : Math.round(parseFloat(subheaderText.toString().replace(',', '.')) * factor) / factor)
+              ? (subheaderText === 0 ? '0,0' : Math.round(parseFloat(subheaderText.toString().replace(',', '.')) * factor) / factor)
               : 'N/A';
 
             td.textContent = _value.toString().replace('.', ',')
           } else {
-            td.textContent = subheaderText !== null
+            const _value = subheaderText !== null
               ? (subheaderText === 0 ? '0,0' : subheaderText.toString().replace('.', ','))
               : 'N/A';
+
+            if (!isNaN(parseFloat(_value))) {
+              const val = parseFloat(_value.replace(',', '.')).toFixed(1)
+              td.textContent = val.toString().replace('.', ',')
+            } else {
+              td.textContent = _value
+            }
           }
 
           tr.appendChild(td);
