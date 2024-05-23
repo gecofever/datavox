@@ -9,8 +9,6 @@ const cityValueSpans = document.querySelectorAll('.cityValue')
 const dateInput = document.getElementById('date')
 const dateValueSpan = document.getElementById('dateValue')
 
-const zoneInput = document.getElementById('zone')
-const zoneValueSpan = document.getElementById('zoneValue')
 
 const numberInterviewsInput = document.getElementById('numberInterviews')
 const numberInterviewsValueSpan = document.getElementById('numberInterviewsValue')
@@ -23,7 +21,6 @@ export const saveChanges = () => {
   const cityValue = cityInput.value || 'Cidade'
   const dateValue = dateInput.value || 'Data'
   const numberInterviewsValue = numberInterviewsInput.value || '0'
-  const zoneValue = zoneInput.value || 'Urbana e Rural'
   const copyrightValue = copyrightInput.value || ''
 
   titleValueSpan.textContent = titleValue
@@ -34,7 +31,6 @@ export const saveChanges = () => {
 
   dateValueSpan.textContent = dateValue
   numberInterviewsValueSpan.textContent = numberInterviewsValue
-  zoneValueSpan.textContent = zoneValue
   copyrightValueSpan.textContent = copyrightValue
 
   floatingForm.classList.add('hidden')

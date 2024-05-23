@@ -17,9 +17,11 @@ export function addExtraTable(data, subheader, tableTitle, valuesArray, isSample
 
     const firstRow = document.createElement('tr');
 
+    const title = isSampleProfile ? 'Bairros / Sítios' : 'Título'
+
     const headers = [
       { text: 'Discriminação', rowspan: 2 },
-      { text: 'Título', colspan: subheader.length },
+      { text: title, colspan: subheader.length },
     ];
 
     headers.forEach((headerData) => {
@@ -62,6 +64,11 @@ export function addExtraTable(data, subheader, tableTitle, valuesArray, isSample
 
     const pageData = data.slice(rowsProcessed, rowsProcessed + maxRowsPerPage);
 
+    if (isSampleProfile && pageData.length >= 2) {
+      pageData[0][0] = 'Absolutos';
+      pageData[1][0] = 'Percentuais';
+    }
+
     for (const row of pageData) {
       const tr = document.createElement('tr');
 
@@ -82,7 +89,7 @@ export function addExtraTable(data, subheader, tableTitle, valuesArray, isSample
           const factor = 10
           if (isSampleProfile) {
             const _value = subheaderText !== null
-              ? (subheaderText === 0 ? '0,0' : Math.round(parseFloat(subheaderText.toString().replace(',', '.')) * factor) / factor)
+              ? (subheaderText === 0 ? '0,0' : Math.round(parseFloat(subheaderText.toString().replace(',', '.')) * factor) / factor).toFixed(1)
               : 'N/A';
 
             td.textContent = _value.toString().replace('.', ',')

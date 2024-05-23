@@ -23,10 +23,12 @@ export function addSecondTable(data, subheader, tableTitle, valuesArray, isSecon
 
     const zoneColspan = (hasUrbana ? 1 : 0) + (hasRural ? 1 : 0);
 
+    const ruralLocations = isSampleProfile ? 'Bairros / Sítios' : 'Localidades rurais'
+
     const headers = [
       { text: 'Discriminação', rowspan: 2 },
       { text: 'Zona', colspan: zoneColspan },
-      { text: 'Localidades rurais', colspan: subheader.length },
+      { text: ruralLocations, colspan: subheader.length },
     ];
 
     if (!hasRural && !hasUrbana) {
@@ -101,6 +103,11 @@ export function addSecondTable(data, subheader, tableTitle, valuesArray, isSecon
 
     const pageData = data.slice(rowsProcessed, rowsProcessed + maxRowsPerPage);
 
+    if (isSampleProfile && pageData.length >= 2) {
+      pageData[0][0] = 'Absolutos';
+      pageData[1][0] = 'Percentuais';
+    }
+
     for (const row of pageData) {
       const tr = document.createElement('tr');
       const td = document.createElement('td');
@@ -121,7 +128,7 @@ export function addSecondTable(data, subheader, tableTitle, valuesArray, isSecon
             const factor = 10
             if (isSampleProfile) {
               const _value = subheaderText !== null
-                ? (subheaderText === 0 ? '0,0' : Math.round(parseFloat(subheaderText.toString().replace(',', '.')) * factor) / factor)
+                ? (subheaderText === 0 ? '0,0' : Math.round(parseFloat(subheaderText.toString().replace(',', '.')) * factor) / factor).toFixed(1)
                 : 'N/A';
 
               td.textContent = _value.toString().replace('.', ',')

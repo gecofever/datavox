@@ -85,6 +85,11 @@ export function addFirstTable(data, options, subheader, tableTitle, valuesArray,
     const pageData = data.slice(rowsProcessed, rowsProcessed + maxRowsPerPage);
     const pageOptions = options.slice(rowsProcessed, rowsProcessed + maxRowsPerPage);
 
+    if (isSampleProfile && pageData.length >= 2) {
+      pageOptions[0] = 'Absolutos';
+      pageOptions[1] = 'Percentuais';
+    }
+
     for (let i = 0; i < pageData.length; i++) {
       const row = pageData[i];
       const tr = document.createElement('tr');
@@ -104,7 +109,7 @@ export function addFirstTable(data, options, subheader, tableTitle, valuesArray,
 
         if (isSampleProfile) {
           const _value = row[j] !== null
-            ? (row[j] === 0 ? '0,0' : (Math.round((parseFloat(row[j].toString().replace(',', '.'))) * factor) / factor))
+            ? (row[j] === 0 ? '0,0' : (Math.round((parseFloat(row[j].toString().replace(',', '.'))) * factor) / factor).toFixed(1))
             : 'N/A';
 
           value = _value.toString().replace('.', ',')
@@ -143,7 +148,7 @@ export function addFirstTable(data, options, subheader, tableTitle, valuesArray,
     rowsProcessed += maxRowsPerPage;
     currentPage++;
 
-    if (rowsProcessed >= data.length) {
+    if (rowsProcessed >= data.length && valuesArray[1] > 0) {
       addSecondTable(data, subheader, tableTitle, valuesArray, isSecondTable, isSampleProfile)
     }
   }
