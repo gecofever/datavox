@@ -1,4 +1,4 @@
-import Chart from "chart.js/auto";
+import Chart, { scales } from "chart.js/auto";
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 import { addNewPage } from './server/addNewPage.js'
@@ -218,7 +218,7 @@ const addBarChart = (opcoes, pontos, title, type) => {
       datasets: [
         {
           label: title,
-          data: data.map((row) => row.total),
+          data: data.map((row) => row.total.toFixed(1)),
           backgroundColor: backgroundColors,
           borderColor: color,
           borderWidth: width,
@@ -231,6 +231,26 @@ const addBarChart = (opcoes, pontos, title, type) => {
         datalabels: datalabelsConfig,
         legend: {
           display: visibility,
+        }
+      },
+      scales: {
+        y: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            display: false
+          },
+        },
+        x: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            display: false
+          },
+          min: 0,
+          max: 100,
         }
       },
     },

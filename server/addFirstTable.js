@@ -1,14 +1,17 @@
-import { addNewPage } from "./addNewPage.js"
-import { addSecondTable } from "./addSecondTable.js"
+import { addNewPage } from "./addNewPage.js";
+import { addSecondTable } from "./addSecondTable.js";
+
+let tableCounter = 1; // Variável global para rastrear o número da tabela
 
 export function addFirstTable(data, options, subheader, tableTitle, valuesArray, isSecondTable, isSampleProfile) {
   const maxRowsPerPage = 15;
 
   let rowsProcessed = 0;
   let currentPage = 1;
+  let tableNumberTitle =`Tabela ${tableCounter}: ${tableTitle}`;
 
   while (rowsProcessed < data.length) {
-    const newA4Page = addNewPage(tableTitle, isSampleProfile);
+    const newA4Page = addNewPage(tableNumberTitle, isSampleProfile);
 
     const newPage = document.createElement('div');
     newPage.classList.add('page');
@@ -105,24 +108,24 @@ export function addFirstTable(data, options, subheader, tableTitle, valuesArray,
       for (let j = 1; j <= 15; j++) {
         let value = 0;
         const td = document.createElement('td');
-        const factor = 10
+        const factor = 10;
 
         if (isSampleProfile) {
           const _value = row[j] !== null
             ? (row[j] === 0 ? '0,0' : (Math.round((parseFloat(row[j].toString().replace(',', '.'))) * factor) / factor).toFixed(1))
             : 'N/A';
 
-          value = _value.toString().replace('.', ',')
+          value = _value.toString().replace('.', ',');
         } else {
           const _value = row[j] !== null
             ? (row[j] === 0 ? '0,0' : row[j].toString().replace('.', ','))
             : 'N/A';
 
           if (!isNaN(parseFloat(_value))) {
-            const val = parseFloat(_value.replace(',', '.')).toFixed(1)
-            value = val.toString().replace('.', ',')
+            const val = parseFloat(_value.replace(',', '.')).toFixed(1);
+            value = val.toString().replace('.', ',');
           } else {
-            value = _value
+            value = _value;
           }
         }
 
@@ -149,7 +152,11 @@ export function addFirstTable(data, options, subheader, tableTitle, valuesArray,
     currentPage++;
 
     if (rowsProcessed >= data.length && valuesArray[1] > 0) {
-      addSecondTable(data, subheader, tableTitle, valuesArray, isSecondTable, isSampleProfile)
+      addSecondTable(data, subheader, tableNumberTitle, valuesArray, isSecondTable, isSampleProfile);
+    }
+
+    if (!isSampleProfile) {
+      tableCounter++;
     }
   }
 }
