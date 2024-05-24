@@ -1,7 +1,4 @@
-import Chart, { scales } from "chart.js/auto";
-import ChartDataLabels from 'chartjs-plugin-datalabels';
-
-import { addNewPage } from './server/addNewPage.js'
+import addNewChart from './server/addNewChart.js'
 import { saveChanges } from './server/saveChanges.js'
 import { addFirstTable } from "./server/addFirstTable.js"
 
@@ -160,119 +157,13 @@ const addChart = (buffer, isBar, isPie) => {
 
   if (isBar) {
     const type = 'bar'
-    addBarChart(opcoes, pontos, tableTitle, type)
+    addNewChart(opcoes, pontos, tableTitle, type)
   }
 
   if (isPie) {
     const type = 'pie'
-    addBarChart(opcoes, pontos, tableTitle, type)
+    addNewChart(opcoes, pontos, tableTitle, type)
   }
-}
-
-const addBarChart = (opcoes, pontos, title, type) => {
-  const data = opcoes.map((option, index) => {
-    const totalString = pontos[index] !== undefined ? pontos[index].toString() : '0.0';
-    const total = parseFloat(totalString.replace(/,/g, '.'));
-    return {
-      option,
-      total,
-    };
-  }).filter(row => row.option !== undefined);
-
-  const canvasElement = document.createElement("canvas");
-  canvasElement.id = "chart";
-  canvasElement.width = 1000;
-  canvasElement.height = 600;
-
-  const divElement = document.createElement("div");
-  divElement.classList.add("div-chart")
-  divElement.appendChild(canvasElement);
-
-  const datalabelsConfig = type === 'bar'
-    ? {
-      color: '#000',
-      anchor: 'end',
-      align: 'end',
-    }
-    : {
-      color: '#fff'
-    }
-
-  let backgroundColors;
-  let color;
-  let width;
-  let visibility = false;
-  if (type === 'bar') {
-    backgroundColors = ['rgba(224, 30, 54, 0.7)'],
-      color = '#393F49',
-      width = 1
-  } else {
-    backgroundColors = ['#E01E36', '#B8122B', '#9F122C'],
-      visibility = true
-  }
-
-  new Chart(canvasElement, {
-    type: type,
-    data: {
-      labels: data.map((row) => row.option),
-      datasets: [
-        {
-          label: title,
-          data: data.map((row) => row.total.toFixed(1)),
-          backgroundColor: backgroundColors,
-          borderColor: color,
-          borderWidth: width,
-        },
-      ],
-    },
-    options: {
-      indexAxis: "y",
-      plugins: {
-        datalabels: datalabelsConfig,
-        legend: {
-          display: visibility,
-        }
-      },
-      scales: {
-        y: {
-          grid: {
-            display: false
-          },
-          ticks: {
-            display: true
-          },
-        },
-        x: {
-          grid: {
-            display: false
-          },
-          ticks: {
-            display: false
-          },
-          min: 0,
-          max: 100,
-        }
-      },
-    },
-    plugins: [ChartDataLabels],
-    datalabels: {
-      color: '#111',
-      textAlign: 'center',
-    }
-  });
-
-
-  const section = document.createElement("section");
-  section.classList.add("container");
-
-  const a4 = addNewPage(title);
-
-  a4.appendChild(divElement)
-
-  section.appendChild(a4);
-
-  const chartSection = document.getElementById('chartSection')
-  chartSection.appendChild(section)
 }
 
 closeTableOptions.addEventListener('click', () => {

@@ -1,7 +1,7 @@
 import { addNewPage } from "./addNewPage.js";
 import { addSecondTable } from "./addSecondTable.js";
 
-let tableCounter = 1; // Variável global para rastrear o número da tabela
+let tableCounter = 1;
 
 export function addFirstTable(data, options, subheader, tableTitle, valuesArray, isSecondTable, isSampleProfile) {
   const maxRowsPerPage = 15;
@@ -85,10 +85,14 @@ export function addFirstTable(data, options, subheader, tableTitle, valuesArray,
     const tbody = document.createElement('tbody');
     tbody.classList.add('tableBody');
 
-    const pageData = data.slice(rowsProcessed, rowsProcessed + maxRowsPerPage);
-    const pageOptions = options.slice(rowsProcessed, rowsProcessed + maxRowsPerPage);
+    let pageData = data.slice(rowsProcessed, rowsProcessed + maxRowsPerPage);
+    let pageOptions = options.slice(rowsProcessed, rowsProcessed + maxRowsPerPage);
 
-    if (isSampleProfile && pageData.length >= 2) {
+    if (isSampleProfile) {
+      if (pageData.length > 2) {
+        pageData = pageData.slice(-2); // Mantém apenas as duas últimas linhas
+        pageOptions = pageOptions.slice(-2); // Mantém apenas as duas últimas linhas
+      }
       pageOptions[0] = 'Absolutos';
       pageOptions[1] = 'Percentuais (%)';
     }

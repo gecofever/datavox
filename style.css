@@ -407,19 +407,37 @@ ul li {
   top: 5px;
   right: 5px;
   padding: 4px;
+  cursor: pointer;
   border: none;
   opacity: 0;
   border-radius: 4px;
   background-color: #e01e36;
 }
 
+.delete-button:hover {
+  opacity: 1;
+}
+
+.update-chart-button {
+  position: absolute;
+  bottom: 50px;
+  left: 10px;
+  padding: 8px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  border-radius: 4px;
+  background-color: #e01e36;
+}
+
+.update-chart-button:hover {
+  opacity: 1;
+}
+
 .sample-profile {
   display: flex;
   justify-content: center;
-}
-
-.delete-button:hover {
-  opacity: 1;
 }
 
 .div-chart {

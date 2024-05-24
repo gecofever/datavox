@@ -62,9 +62,12 @@ export function addExtraTable(data, subheader, tableTitle, valuesArray, isSample
     const tbody = document.createElement('tbody');
     tbody.classList.add('tableBody');
 
-    const pageData = data.slice(rowsProcessed, rowsProcessed + maxRowsPerPage);
+    let pageData = data.slice(rowsProcessed, rowsProcessed + maxRowsPerPage);
 
-    if (isSampleProfile && pageData.length >= 2) {
+    if (isSampleProfile) {
+      if (pageData.length > 2) {
+        pageData = pageData.slice(-2); // Mantém apenas as duas últimas linhas
+      }
       pageData[0][0] = 'Absolutos';
       pageData[1][0] = 'Percentuais (%)';
     }
