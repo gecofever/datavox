@@ -239,7 +239,7 @@ const addBarChart = (opcoes, pontos, title, type) => {
             display: false
           },
           ticks: {
-            display: false
+            display: true
           },
         },
         x: {

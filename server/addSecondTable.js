@@ -1,5 +1,5 @@
-import { addNewPage } from "./addNewPage.js"
-import { addExtraTable } from "./addExtraTable.js"
+import { addNewPage } from "./addNewPage.js";
+import { addExtraTable } from "./addExtraTable.js";
 
 export function addSecondTable(data, subheader, tableTitle, valuesArray, isSecondTable, isSampleProfile) {
   const maxRowsPerPage = 15;
@@ -23,7 +23,7 @@ export function addSecondTable(data, subheader, tableTitle, valuesArray, isSecon
 
     const zoneColspan = (hasUrbana ? 1 : 0) + (hasRural ? 1 : 0);
 
-    const ruralLocations = isSampleProfile ? 'Bairros / Sítios' : 'Localidades rurais'
+    const ruralLocations = isSampleProfile ? 'Bairros / Sítios' : 'Localidades rurais';
 
     const headers = [
       { text: 'Discriminação', rowspan: 2 },
@@ -36,13 +36,13 @@ export function addSecondTable(data, subheader, tableTitle, valuesArray, isSecon
     }
 
     if (hasRural && !hasUrbana) {
-      headers[1].text = 'Total Rural'
-      headers[1].rowspan = 2
+      headers[1].text = 'Total Rural';
+      headers[1].rowspan = 2;
     }
 
     if (hasUrbana && !hasRural) {
-      headers[1].text = 'Total Urbano'
-      headers[1].rowspan = 2
+      headers[1].text = 'Total Urbano';
+      headers[1].rowspan = 2;
     }
 
     headers.forEach((headerData) => {
@@ -79,13 +79,13 @@ export function addSecondTable(data, subheader, tableTitle, valuesArray, isSecon
     } else {
       const subheadersQuantity = () => {
         if ((!hasRural && hasUrbana) || (hasRural && !hasUrbana)) {
-          return 17
+          return 17;
         } else {
-          return 16
+          return 16;
         }
-      }
+      };
 
-      const quantity = subheadersQuantity()
+      const quantity = subheadersQuantity();
       subheader.slice(quantity).forEach((subheaderText) => {
         const th = document.createElement('th');
         th.textContent = subheaderText;
@@ -105,10 +105,10 @@ export function addSecondTable(data, subheader, tableTitle, valuesArray, isSecon
 
     if (isSampleProfile && pageData.length >= 2) {
       pageData[0][0] = 'Absolutos';
-      pageData[1][0] = 'Percentuais';
+      pageData[1][0] = 'Percentuais (%)';
     }
 
-    for (const row of pageData) {
+    for (const [rowIndex, row] of pageData.entries()) {
       const tr = document.createElement('tr');
       const td = document.createElement('td');
       const options =
@@ -122,26 +122,36 @@ export function addSecondTable(data, subheader, tableTitle, valuesArray, isSecon
       tr.appendChild(td);
 
       if (isSecondTable) {
-        row.forEach((subheaderText, index) => {
+        row.forEach((value, index) => {
           if (index > valuesArray[0] && index <= ((valuesArray[0]) + (valuesArray[1]))) {
             const td = document.createElement('td');
-            const factor = 10
+            const factor = 10;
             if (isSampleProfile) {
-              const _value = subheaderText !== null
-                ? (subheaderText === 0 ? '0,0' : Math.round(parseFloat(subheaderText.toString().replace(',', '.')) * factor) / factor).toFixed(1)
-                : 'N/A';
-
-              td.textContent = _value.toString().replace('.', ',')
+              let formattedValue;
+              if (rowIndex === 1) { // Percentuais (%)
+                formattedValue = value !== null
+                  ? (value === 0 ? '0,0' : (Math.round(parseFloat(value.toString().replace(',', '.')) * factor) / factor).toFixed(1))
+                  : 'N/A';
+              } else if (rowIndex === 0) { // Absolutos
+                formattedValue = value !== null
+                  ? (value === 0 ? '0' : Math.round(parseFloat(value.toString().replace(',', '.'))).toString())
+                  : 'N/A';
+              } else {
+                formattedValue = value !== null
+                  ? (value === 0 ? '0' : value.toString())
+                  : 'N/A';
+              }
+              td.textContent = formattedValue.toString().replace('.', ',');
             } else {
-              const _value = subheaderText !== null
-                ? (subheaderText === 0 ? '0,0' : subheaderText.toString().replace('.', ','))
+              const _value = value !== null
+                ? (value === 0 ? '0,0' : value.toString().replace('.', ','))
                 : 'N/A';
 
               if (!isNaN(parseFloat(_value))) {
-                const val = parseFloat(_value.replace(',', '.')).toFixed(1)
-                td.textContent = val.toString().replace('.', ',')
+                const val = parseFloat(_value.replace(',', '.')).toFixed(1);
+                td.textContent = val.toString().replace('.', ',');
               } else {
-                td.textContent = _value
+                td.textContent = _value;
               }
             }
 
@@ -151,23 +161,33 @@ export function addSecondTable(data, subheader, tableTitle, valuesArray, isSecon
       } else {
         row.slice(16).forEach((value) => {
           const td = document.createElement('td');
-          const factor = 10
+          const factor = 10;
           if (isSampleProfile) {
-            const _value = value !== null
-              ? (value === 0 ? '0.0' : Math.round(parseFloat(value.toString().replace(',', '.')) * factor) / factor)
-              : 'N/A';
-
-            td.textContent = _value.toString().replace('.', ',')
+            let formattedValue;
+            if (rowIndex === 1) { // Percentuais (%)
+              formattedValue = value !== null
+                ? (value === 0 ? '0,0' : (Math.round(parseFloat(value.toString().replace(',', '.')) * factor) / factor).toFixed(1))
+                : 'N/A';
+            } else if (rowIndex === 0) { // Absolutos
+              formattedValue = value !== null
+                ? (value === 0 ? '0' : Math.round(parseFloat(value.toString().replace(',', '.'))).toString())
+                : 'N/A';
+            } else {
+              formattedValue = value !== null
+                ? (value === 0 ? '0' : value.toString())
+                : 'N/A';
+            }
+            td.textContent = formattedValue.toString().replace('.', ',');
           } else {
             const _value = value !== null
               ? (value === 0 ? '0,0' : value.toString().replace('.', ','))
               : 'N/A';
 
             if (!isNaN(parseFloat(_value))) {
-              const val = parseFloat(_value.replace(',', '.')).toFixed(1)
-              td.textContent = val.toString().replace('.', ',')
+              const val = parseFloat(_value.replace(',', '.')).toFixed(1);
+              td.textContent = val.toString().replace('.', ',');
             } else {
-              td.textContent = _value
+              td.textContent = _value;
             }
           }
 
@@ -197,7 +217,7 @@ export function addSecondTable(data, subheader, tableTitle, valuesArray, isSecon
   if (isSecondTable) {
     for (let i = 2; i <= 10; i++) {
       if (valuesArray[i] === 0) {
-        return
+        return;
       }
       addExtraTable(data, subheader, tableTitle, valuesArray, isSampleProfile, i);
     }

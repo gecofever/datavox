@@ -1,4 +1,4 @@
-import { addNewPage } from "./addNewPage.js"
+import { addNewPage } from "./addNewPage.js";
 
 export function addExtraTable(data, subheader, tableTitle, valuesArray, isSampleProfile, position) {
   const maxRowsPerPage = 15;
@@ -17,7 +17,7 @@ export function addExtraTable(data, subheader, tableTitle, valuesArray, isSample
 
     const firstRow = document.createElement('tr');
 
-    const title = isSampleProfile ? 'Bairros / Sítios' : 'Título'
+    const title = isSampleProfile ? 'Bairros / Sítios' : 'Título';
 
     const headers = [
       { text: 'Discriminação', rowspan: 2 },
@@ -66,10 +66,10 @@ export function addExtraTable(data, subheader, tableTitle, valuesArray, isSample
 
     if (isSampleProfile && pageData.length >= 2) {
       pageData[0][0] = 'Absolutos';
-      pageData[1][0] = 'Percentuais';
+      pageData[1][0] = 'Percentuais (%)';
     }
 
-    for (const row of pageData) {
+    for (const [rowIndex, row] of pageData.entries()) {
       const tr = document.createElement('tr');
 
       const td = document.createElement('td');
@@ -83,26 +83,36 @@ export function addExtraTable(data, subheader, tableTitle, valuesArray, isSample
       td.textContent = options;
       tr.appendChild(td);
 
-      row.forEach((subheaderText, index) => {
+      row.forEach((value, index) => {
         if (index > colunasAnteriores && index <= (colunasAnteriores + valuesArray[position])) {
           const td = document.createElement('td');
-          const factor = 10
+          const factor = 10;
           if (isSampleProfile) {
-            const _value = subheaderText !== null
-              ? (subheaderText === 0 ? '0,0' : Math.round(parseFloat(subheaderText.toString().replace(',', '.')) * factor) / factor).toFixed(1)
-              : 'N/A';
-
-            td.textContent = _value.toString().replace('.', ',')
+            let formattedValue;
+            if (rowIndex === 1) { // Percentuais (%)
+              formattedValue = value !== null
+                ? (value === 0 ? '0,0' : (Math.round(parseFloat(value.toString().replace(',', '.')) * factor) / factor).toFixed(1))
+                : 'N/A';
+            } else if (rowIndex === 0) { // Absolutos
+              formattedValue = value !== null
+                ? (value === 0 ? '0' : Math.round(parseFloat(value.toString().replace(',', '.'))).toString())
+                : 'N/A';
+            } else {
+              formattedValue = value !== null
+                ? (value === 0 ? '0' : value.toString())
+                : 'N/A';
+            }
+            td.textContent = formattedValue.toString().replace('.', ',');
           } else {
-            const _value = subheaderText !== null
-              ? (subheaderText === 0 ? '0,0' : subheaderText.toString().replace('.', ','))
+            const _value = value !== null
+              ? (value === 0 ? '0,0' : value.toString().replace('.', ','))
               : 'N/A';
 
             if (!isNaN(parseFloat(_value))) {
-              const val = parseFloat(_value.replace(',', '.')).toFixed(1)
-              td.textContent = val.toString().replace('.', ',')
+              const val = parseFloat(_value.replace(',', '.')).toFixed(1);
+              td.textContent = val.toString().replace('.', ',');
             } else {
-              td.textContent = _value
+              td.textContent = _value;
             }
           }
 

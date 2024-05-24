@@ -8,7 +8,7 @@ export function addFirstTable(data, options, subheader, tableTitle, valuesArray,
 
   let rowsProcessed = 0;
   let currentPage = 1;
-  let tableNumberTitle =`Tabela ${tableCounter}: ${tableTitle}`;
+  let tableNumberTitle = `Tabela ${tableCounter}: ${tableTitle}`;
 
   while (rowsProcessed < data.length) {
     const newA4Page = addNewPage(tableNumberTitle, isSampleProfile);
@@ -90,7 +90,7 @@ export function addFirstTable(data, options, subheader, tableTitle, valuesArray,
 
     if (isSampleProfile && pageData.length >= 2) {
       pageOptions[0] = 'Absolutos';
-      pageOptions[1] = 'Percentuais';
+      pageOptions[1] = 'Percentuais (%)';
     }
 
     for (let i = 0; i < pageData.length; i++) {
@@ -111,11 +111,22 @@ export function addFirstTable(data, options, subheader, tableTitle, valuesArray,
         const factor = 10;
 
         if (isSampleProfile) {
-          const _value = row[j] !== null
-            ? (row[j] === 0 ? '0,0' : (Math.round((parseFloat(row[j].toString().replace(',', '.'))) * factor) / factor).toFixed(1))
-            : 'N/A';
-
-          value = _value.toString().replace('.', ',');
+          if (i === 1) { // Segunda linha - Percentuais (%)
+            const _value = row[j] !== null
+              ? (row[j] === 0 ? '0,0' : (Math.round((parseFloat(row[j].toString().replace(',', '.'))) * factor) / factor).toFixed(1))
+              : 'N/A';
+            value = _value.toString().replace('.', ',');
+          } else if (i === 0) { // Primeira linha - Absolutos
+            const _value = row[j] !== null
+              ? (row[j] === 0 ? '0' : Math.round(parseFloat(row[j].toString().replace(',', '.'))).toString())
+              : 'N/A';
+            value = _value.toString().replace('.', ',');
+          } else {
+            const _value = row[j] !== null
+              ? (row[j] === 0 ? '0' : row[j].toString())
+              : 'N/A';
+            value = _value.toString().replace('.', ',');
+          }
         } else {
           const _value = row[j] !== null
             ? (row[j] === 0 ? '0,0' : row[j].toString().replace('.', ','))

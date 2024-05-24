@@ -43,9 +43,14 @@
 
     <section>
       <div class="home">
-        <h1 class="homeTitle">
-          <span id="titleValue">Título</span>
-        </h1>
+        <div
+          style="margin-bottom: 32px"
+          contenteditable="true"
+          class="multiline-input home-title"
+        >
+          PESQUISA DE OPINIÃO PÚBLICA<br />SOBRE<br />ASSUNTOS
+          POLÍTICOS/ADMINISTRATIVOS
+        </div>
         <div class="backgroundHome">
           <img src="logo.svg" alt="Logo" class="logo" />
         </div>
@@ -75,7 +80,11 @@
           área em estudo.
         </p>
 
-        <p>
+        <div
+          style="margin-bottom: 32px"
+          contenteditable="true"
+          class="multiline-input"
+        >
           AMOSTRA - Foram realizadas amostras representativas da população em
           estudo, estratificada com alocação proporcional à população de cada
           estrato. Os estratos considerados foram os setores censitários. Dentro
@@ -87,15 +96,15 @@
           segundo estágio, através do método sistemático, é selecionado em cada
           conglomerado um número fixo de eleitores segundo cotas de variáveis
           descritas abaixo:
-        </p>
+        </div>
 
         <p>
-          SEXO - Masculino e Feminino – Dados do Censo Demográfico do IBGE/2000.
+          SEXO - Masculino e Feminino – Dados do Censo Demográfico do IBGE/2022.
         </p>
 
         <p>
           GRUPO DE IDADE - 16-24, 25-34, 35-44, 45-59, 60 anos e mais – Dados de
-          Censo Demográfico do IBGE/2000.
+          Censo Demográfico do IBGE/2022.
         </p>
 
         <p>
@@ -168,10 +177,10 @@
 
         <ul>
           <li>TOTAL</li>
-          <li>SEXO - Masculino e Feminino.</li>
+          <li>SEXO - Masculino e Feminino - Dados do Tribunal Superior Eleitoral-TSE.</li>
           <li>
             GRUPO DE IDADE - 16 a 24 anos, 25 a 34 anos, 35 a 44 anos, 45 a 59
-            anos e 60 anos e mais.
+            anos e 60 anos e mais - Dados do Tribunal Superior Eleitoral-TSE.
           </li>
           <li>
             ESCOLARIDADE - Analfabeto/Lê e Escreve, Fundamental completo ou
@@ -184,7 +193,7 @@
             contenteditable="true"
             class="multiline-input"
           >
-          ZONA - Urbana e Rural.
+            ZONA - Urbana e Rural.
           </li>
           <li
             style="margin-bottom: 32px"
@@ -299,13 +308,6 @@
 
     <div id="floatingForm" class="hidden">
       <form id="editForm">
-        <label for="title">Título:</label>
-        <input
-          type="text"
-          id="title"
-          placeholder="Ex: Pesquisa de satisfação"
-        />
-
         <label for="city">Cidade:</label>
         <input type="text" id="city" placeholder="Ex: Cabaceiras - PB" />
 

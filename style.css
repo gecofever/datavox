@@ -270,11 +270,11 @@ ul li {
   text-transform: uppercase;
 }
 
-.homeTitle {
+.home-title {
   position: absolute;
   z-index: 1;
   font-size: 32px;
-  width: 700px;
+  max-width: 1000px;
   text-align: center;
   margin-top: 64px;
   text-transform: uppercase;
@@ -303,7 +303,7 @@ ul li {
   width: 1000px;
   height: auto;
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
