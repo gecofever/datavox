@@ -3,6 +3,18 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 import { addNewPage } from '../server/addNewPage'
 
+const marginLegend = {
+  id: 'marginLegend',
+  afterInit(chart, args, options) {
+    const fitValue = chart.legend.fit
+    chart.legend.fit = function fit() {
+      fitValue.bind(chart.legend)()
+      let height = this.height += 20
+      return height
+    }
+  }
+}
+
 let chartInstance;
 let chartIndex = 0;
 let chartInstances = {};
@@ -17,6 +29,8 @@ const addNewChart = (opcoes, pontos, title, type) => {
     };
   }).filter(row => row.option !== undefined);
 
+  const truncatedData = data.slice(0, 20);
+
   chartIndex++;
 
   const canvasElement = document.createElement("canvas");
@@ -29,7 +43,7 @@ const addNewChart = (opcoes, pontos, title, type) => {
   divElement.appendChild(canvasElement);
 
   const datalabelsConfig = {
-    color: type === 'bar' ? '#000' : '#fff',
+    color: '#000',
     anchor: 'end',
     align: 'end',
   };
@@ -71,11 +85,11 @@ const addNewChart = (opcoes, pontos, title, type) => {
   chartInstance = new Chart(canvasElement, {
     type: type,
     data: {
-      labels: data.map((row) => row.option),
+      labels: truncatedData.map((row) => row.option),
       datasets: [
         {
           label: title,
-          data: data.map((row) => row.total.toFixed(1)),
+          data: truncatedData.map((row) => row.total.toFixed(1)),
           backgroundColor: backgroundColors,
           borderColor: color,
           borderWidth: width,
@@ -83,11 +97,17 @@ const addNewChart = (opcoes, pontos, title, type) => {
       ],
     },
     options: {
+      layout: {
+        padding: 10
+      },
       indexAxis: "y",
       plugins: {
         datalabels: datalabelsConfig,
         legend: {
           display: visibility,
+          labels: {
+            position: 'top',
+          }
         }
       },
       scales: {
@@ -111,7 +131,7 @@ const addNewChart = (opcoes, pontos, title, type) => {
         }
       },
     },
-    plugins: [ChartDataLabels],
+    plugins: [ChartDataLabels, marginLegend],
     datalabels: {
       color: '#111',
       textAlign: 'center',
@@ -141,12 +161,12 @@ const updateChart = (pageId) => {
   const type = chartType === 'bar' ? 'bar' : 'pie';
 
   const datalabelsConfig = {
-    color: type === 'bar' ? '#000' : '#fff',
-    anchor: type === 'pie' ? 'center' : 'end',
-    align: type === 'pie' ? 'center' : 'end',
+    color: '#000',
+    anchor: 'end',
+    align: 'end',
   };
 
-  const ticksDisplay = type === 'pie' ? false : true;
+  const ticksDisplay = type === 'bar' ? true : false
 
   let backgroundColors;
   let color;

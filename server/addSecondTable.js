@@ -2,7 +2,7 @@ import { addNewPage } from "./addNewPage.js";
 import { addExtraTable } from "./addExtraTable.js";
 
 export function addSecondTable(data, subheader, tableTitle, valuesArray, isSecondTable, isSampleProfile) {
-  const maxRowsPerPage = 15;
+  const maxRowsPerPage = 20;
 
   let rowsProcessed = 0;
   let currentPage = 1;

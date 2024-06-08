@@ -4,11 +4,20 @@ import { addSecondTable } from "./addSecondTable.js";
 let tableCounter = 1;
 
 export function addFirstTable(data, options, subheader, tableTitle, valuesArray, isSecondTable, isSampleProfile) {
-  const maxRowsPerPage = 15;
+  const maxRowsPerPage = 20;
 
   let rowsProcessed = 0;
   let currentPage = 1;
   let tableNumberTitle = `Tabela ${tableCounter}: ${tableTitle}`;
+
+  const columnTitles = [
+    'Discriminação',
+    'Total',
+    'MAS', 'FEM',
+    '16 a 24', '25 a 34', '35 a 44', '45 a 59', '60 e mais',
+    'Analfabeto/Lê e Escreve', 'Ensino Fundamental', 'Ensino Médio', 'Ensino Superior',
+    'Até 1 S.M.', 'De 1 a 3 S.M.', 'Mais de 3 S.M.'
+  ];
 
   while (rowsProcessed < data.length) {
     const newA4Page = addNewPage(tableNumberTitle, isSampleProfile);
@@ -51,29 +60,9 @@ export function addFirstTable(data, options, subheader, tableTitle, valuesArray,
     const secondRow = document.createElement('tr');
     secondRow.classList.add('headerChild');
 
-    const columnMapping = {
-      Opção: 'Discriminação',
-      Total: 'Total',
-      Masculino: 'MAS',
-      Feminino: 'FEM',
-      '16 a 24 anos': '16 a 24',
-      '25 a 34 anos': '25 a 34',
-      '35 a 44 anos': '35 a 44',
-      '45 a 59 anos': '45 a 59',
-      '60 anos ou mais': '60 e mais',
-      'Até 5º Ano do ensino fundamental': 'Analfabeto/Lê e Escreve',
-      'Do 6º ao 9º Ano do ensino fundamental': 'Ensino Fundamental',
-      'Ensino médio completo ou incompleto': 'Ensino Médio',
-      'Superior completo ou incompleto': 'Ensino Superior',
-      'Até R$ 1.320,00 (1 S.M)': 'Até 1 S.M.',
-      'De R$ 1.320,01 a R$ 3.960,00 (De 1 a 3 S.M)': 'De 1 a 3 S.M.',
-      'Mais de R$ 3 960,01 (Mais de 3 S.M)': 'Mais de 3 S.M.',
-    };
-
-    subheader.slice(2, 16).forEach((subheaderText) => {
+    columnTitles.slice(2).forEach((columnTitle) => {
       const th = document.createElement('th');
-      const mappedSubheader = columnMapping[subheaderText] || subheaderText;
-      th.textContent = mappedSubheader;
+      th.textContent = columnTitle;
       secondRow.appendChild(th);
     });
 

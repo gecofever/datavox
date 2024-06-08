@@ -1,7 +1,7 @@
 import { addNewPage } from "./addNewPage.js";
 
 export function addExtraTable(data, subheader, tableTitle, valuesArray, isSampleProfile, position) {
-  const maxRowsPerPage = 15;
+  const maxRowsPerPage = 20;
   const colunasAnteriores = valuesArray.slice(0, position).reduce((total, colunas) => total + colunas, 0);
 
   let rowsProcessed = 0;
