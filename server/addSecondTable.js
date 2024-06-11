@@ -28,8 +28,11 @@ export function addSecondTable(data, subheader, tableTitle, valuesArray, isSecon
     const headers = [
       { text: 'Discriminação', rowspan: 2 },
       { text: 'Zona', colspan: zoneColspan },
-      { text: ruralLocations, colspan: subheader.length },
     ];
+
+    if (data[0].length > 18) {
+      headers.push({ text: ruralLocations, colspan: subheader.length });
+    }
 
     if (!hasRural && !hasUrbana) {
       headers.splice(1, 1);
