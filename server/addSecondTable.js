@@ -30,7 +30,7 @@ export function addSecondTable(data, subheader, tableTitle, valuesArray, isSecon
       { text: 'Zona', colspan: zoneColspan },
     ];
 
-    if (data[0].length > 18) {
+    if (data[0].length > 18 && valuesArray[1] > 2) {
       headers.push({ text: ruralLocations, colspan: subheader.length });
     }
 
