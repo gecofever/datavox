@@ -1,6 +1,7 @@
 const tableSection = document.getElementById("tableSection");
 const chartSection = document.getElementById("chartSection");
 const sampleProfileSection = document.getElementById("sampleProfileSection");
+import { decrementTableCounter } from "./addFirstTable";
 
 let idInt = 0;
 
@@ -69,3 +70,4 @@ chartSection.addEventListener('click', (event) => {
     }
   }
 });
+

@@ -5,6 +5,7 @@ let tableCounter = 1;
 
 export function addFirstTable(data, options, subheader, tableTitle, valuesArray, isSecondTable, isSampleProfile) {
   const maxRowsPerPage = 20;
+  console.log(tableCounter)
 
   let rowsProcessed = 0;
   let currentPage = 1;
@@ -162,5 +163,11 @@ export function addFirstTable(data, options, subheader, tableTitle, valuesArray,
     if (!isSampleProfile) {
       tableCounter++;
     }
+  }
+}
+
+export function decrementTableCounter() {
+  if (tableCounter > 1) {
+    tableCounter--;
   }
 }

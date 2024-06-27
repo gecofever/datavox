@@ -78,7 +78,7 @@ export function addExtraTable(data, subheader, tableTitle, valuesArray, isSample
       const td = document.createElement('td');
       const options =
         row[0] !== null
-          ? row[0].trim().toLowerCase() === 'soma'
+          ? row[0].toString().trim().toLowerCase() === 'soma'
             ? 'Total'
             : row[0]
           : 'N/A';

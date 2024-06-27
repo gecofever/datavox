@@ -73,7 +73,13 @@
 
         <p>LOCAL - <span class="cityValue">cidade</span>.</p>
 
-        <p>PERÍODO DE CAMPO - Dia <span id="dateValue">data</span>.</p>
+        <div
+          style="margin-bottom: 32px"
+          contenteditable="true"
+          class="multiline-input"
+        >
+          PERÍODO DE CAMPO - Dia .
+        </div>
 
         <p>
           UNIVERSO - A pesquisa foi realizada com pessoas de 16 anos ou mais da
@@ -99,11 +105,13 @@
         </div>
 
         <p>
-          SEXO - Masculino e Feminino – Dados do Tribunal Superior Eleitoral-TSE.
+          SEXO - Masculino e Feminino – Dados do Tribunal Superior
+          Eleitoral-TSE.
         </p>
 
         <p>
-          GRUPO DE IDADE - 16-24, 25-34, 35-44, 45-59, 60 anos e mais – Dados do Tribunal Superior Eleitoral-TSE.
+          GRUPO DE IDADE - 16-24, 25-34, 35-44, 45-59, 60 anos e mais – Dados do
+          Tribunal Superior Eleitoral-TSE.
         </p>
 
         <p>
@@ -175,17 +183,26 @@
         </p>
 
         <ul>
-          <li>TOTAL</li><br />
-          <li>SEXO - Masculino e Feminino - Dados do Tribunal Superior Eleitoral-TSE.</li><br />
+          <li>TOTAL</li>
+          <br />
+          <li>
+            SEXO - Masculino e Feminino - Dados do Tribunal Superior
+            Eleitoral-TSE.
+          </li>
+          <br />
           <li>
             GRUPO DE IDADE - 16 a 24 anos, 25 a 34 anos, 35 a 44 anos, 45 a 59
-            anos e 60 anos<br /> e mais - Dados do Tribunal Superior Eleitoral-TSE.
-          </li><br />
+            anos e 60 anos<br />
+            e mais - Dados do Tribunal Superior Eleitoral-TSE.
+          </li>
+          <br />
           <li>
             ESCOLARIDADE - Analfabeto/Lê e Escreve, Fundamental completo ou
-            Incompleto,<br /> Ensino Médio completo ou incompleto e Superior completo
-            ou incompleto.
-          </li><br />
+            Incompleto,<br />
+            Ensino Médio completo ou incompleto e Superior completo ou
+            incompleto.
+          </li>
+          <br />
           <li>RENDA FAMILIAR - Até 1 S.M., De 1 a 3 S.M. e mais de 3 S.M.</li>
         </ul>
 
@@ -309,9 +326,6 @@
       <form id="editForm">
         <label for="city">Cidade:</label>
         <input type="text" id="city" placeholder="Ex: Cabaceiras - PB" />
-
-        <label for="date">Data:</label>
-        <input type="text" id="date" placeholder="Ex: 23 de dezembro de 2023" />
 
         <label for="numberInterviews">Número de entrevistas:</label>
         <input type="text" id="numberInterviews" placeholder="Ex: 300" />
