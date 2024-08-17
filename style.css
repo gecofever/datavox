@@ -470,17 +470,10 @@ ul li {
   text-transform: capitalize !important;
   min-width: 50px;
   word-wrap: break-word;
-  /* width: auto; */
 }
 
-/* .tableHead tr th:first-child input {
-  display: flex;
-  text-align: left;
-  width: 100px;
-} */
-
 .tableHead tr:first-child th:first-child {
-  width: 100px;
+  width: 150px;
 }
 
 .tableBody tr td:first-child {
